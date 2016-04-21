@@ -14,6 +14,27 @@
 	<logger name="to.my.code">
 		<level value="debug" />
 	</logger>
+
+	<!-- JDBC Query Loggers -->
+<!--
+	<logger name="jdbc.sqlonly">
+		<level value="info" />
+	</logger>
+-->
+
+	<logger name="jdbc.sqltiming">
+		<level value="debug" />
+	</logger>
+
+<!--
+	<logger name="jdbc.audit">
+		<level value="info" />
+	</logger>
+
+	<logger name="jdbc.resultset">
+		<level value="info" />
+	</logger>
+-->
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">

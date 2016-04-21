@@ -22,7 +22,8 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
-				/WEB-INF/spring/appServlet/beans.xml
+				/WEB-INF/spring/appServlet/context-transaction.xml
+				/WEB-INF/spring/appServlet/context-member.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -35,6 +36,9 @@
 
 	<resource-ref>
         <res-ref-name>jdbc/Oracle11g</res-ref-name>
+        <!--
+        <res-type>org.springframework.jdbc.datasource.DriverManagerDataSource</res-type>
+        -->
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+<!-- 
+		driverClassName = "oracle.jdbc.driver.OracleDriver"
+		url = "jdbc:oracle:thin:@oracle.my.to:1521:DBSVR"
+		type = "org.springframework.jdbc.datasource.DriverManagerDataSource"
+-->
+		
+	<Resource
+		auth = "Container"
+		driverClassName = "net.sf.log4jdbc.DriverSpy"
+		url = "jdbc:log4jdbc:oracle:thin:@oracle.my.to:1521:DBSVR"
+		username = "hreeman"
+		password = "hreeman"
+		name = "jdbc/Oracle11g"
+		type = "javax.sql.DataSource"
+		factory = "org.apache.tomcat.jdbc.pool.DataSourceFactory"
+		maxActive = "100" 
+		minIdle = "10"
+		maxWait = "10000"
+		initialSize = "10"
+		validationQuery = "SELECT 1 FROM DUAL"
+		defaultAutoCommit = "false"
+	/>
+</Context>
