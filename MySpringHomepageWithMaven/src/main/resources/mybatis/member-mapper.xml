@@ -4,18 +4,26 @@
 
 <mapper namespace="member">
 	<resultMap type="to.my.code.member.vo.MemberVo" id="MemberResultMap">
-		<id column="member_email" property="email"/>
+		<id column="member_no" property="no"/>
+		<result column="member_email" property="email"/>
 		<result column="member_password" property="password"/>
 		<result column="member_name" property="name"/>
 		<result column="member_birth" property="birth"/>
 		<result column="member_gender" property="gender"/>
 		<result column="member_phone_number" property="phoneNumber"/>
 		<result column="member_reg_date" property="regDate"/>
+		<result column="member_login_date" property="loginDate"/>
 	</resultMap>
 
 	<insert id="insertMember"  parameterType="to.my.code.member.vo.MemberVo">
-		insert into member values(#{email}, #{password}, #{name}, #{birth}, #{gender}, #{phoneNumber}, sysdate)
+		insert into member values(SEQ_MEMBER_NO.NEXTVAL, #{email}, #{password}, #{name}, #{birth}, #{gender}, #{phoneNumber}, sysdate, sysdate)
 	</insert>
+	
+	<update id="updateMemberLoginTime" parameterType="to.my.code.member.vo.MemberVo">
+		update member
+		set member_login_date = sysdate
+		where member_no = #{no}
+	</update>
 	
 	<select id="selectMemberListAll" resultMap="MemberResultMap">
 		select *

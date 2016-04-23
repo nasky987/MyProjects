@@ -24,6 +24,7 @@
 				/WEB-INF/spring/appServlet/servlet-context.xml
 				/WEB-INF/spring/appServlet/context-transaction.xml
 				/WEB-INF/spring/appServlet/context-member.xml
+				/WEB-INF/spring/appServlet/context-board.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>

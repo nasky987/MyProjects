@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	<resultMap type="to.my.code.board.vo.BoardVo" id="BoardResultMap">
+		<id column="board_no" property="no"/>
+		<result column="board_title" property="title"/>
+		<result column="board_content" property="content"/>
+		<result column="board_writer" property="writer"/>
+		<result column="board_write_date" property="writeDate"/>
+		<result column="board_hit" property="hit"/>
+	</resultMap>
+
+	<insert id="insertBoard"  parameterType="to.my.code.board.vo.BoardVo">
+		insert into board values(SEQ_BOARD_NO.NEXTVAL, #{title}, #{content}, #{writer}, sysdate, 0)
+	</insert>
+	
+	<select id="selectBoardListAll" resultMap="BoardResultMap">
+		select *
+		from board
+	</select>
+	
+	<select id="selectBoard" resultMap="BoardResultMap" parameterType="Long">
+		select *
+		from board
+		where board_no = #{no}
+	</select>
+</mapper>

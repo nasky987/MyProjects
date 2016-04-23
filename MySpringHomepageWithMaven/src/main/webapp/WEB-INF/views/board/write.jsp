@@ -10,12 +10,13 @@
  -->
 	<jsp:include page="../common/header.jsp" />
 <body>
-	
-	<form action="login" method="POST">
-		이메일 : <input type="text" name="email" /><br/>
-		암호 : <input type="password" name="password" /><br/>
-		
-		<input type="submit" value="로그인">
+	<h1>write Page</h1>
+	<form action="write" method="POST">
+		제목 : <input type="text" name="title"><br/>
+		내용 : <textarea rows="20" cols="40" name="content"></textarea><br/>
+		작성자 : ${sessionScope.memberVo.email} <br/>
+		<input type="hidden" name="writer" value="${sessionScope.memberVo.email}">
+		<input type="submit">
 	</form>
 </body>
 </html>

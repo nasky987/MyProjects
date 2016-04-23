@@ -1,4 +1,4 @@
-package to.my.code.member.dao;
+package to.my.code.common.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import to.my.code.common.dao.GenericDao;
-
-public abstract class AbstractMyBatisMemberDao<T> implements GenericDao<T>{
+public abstract class AbstractMyBatisDao<T> implements GenericDao<T>{
 	@Autowired
 	protected SqlSessionTemplate sqlsessionTemplate;
 	
