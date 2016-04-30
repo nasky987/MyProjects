@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<beans profile="develop">
+		<!-- DataSource(DB 접속정보) -->
+	   	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	      <property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+	      <property name="url" value="jdbc:mariadb://mariadb.my.to:3306/mybatis" />
+	      <property name="username" value="hreeman" />
+	      <property name="password" value="hreeman" />
+	    </bean>
+	</beans>
+	
+	<beans profile="product">
+		<!-- DataSource(DB 접속정보) -->
+	   	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	      <property name="url" value="jdbc:oracle:thin:@oracle.my.to:1521:DBSVR" />
+	      <property name="username" value="hreeman" />
+	      <property name="password" value="hreeman" />
+	    </bean>
+	</beans>
+</beans>

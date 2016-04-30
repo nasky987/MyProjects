@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 마이바티스 세션을 만들기 위한 팩토리 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 마이바티스 설정파일 경로 -->
+		<!--
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+		-->
+		<!-- 마이바티스 매퍼 XML 파일 경로(마이바티스 설정 파일로도 지정가능) -->
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:mappers/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 마이바티스 동기화에 안전한 세션을 생성해줌(스코프 지정 필요할 듯?) -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+</beans>

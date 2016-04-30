@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 참고 : http://mybatis.org/mybatis-3/ko/configuration.html -->
+
+	<!-- 마이바티스 전역 설정 정보 -->
+	<settings>
+		<!-- insert시 키 자동생성 반환 유무 (오라클 같은 Sequence는 사용X) -->
+		<setting name="useGeneratedKeys" value="true" />
+	</settings>
+
+	<!-- 별칭 설정(ResultType, ParameterType, Type 등 매퍼 내에서 사용할 별칭) -->
+	<!--
+	<typeAliases>
+		<typeAlias alias="Student" type="com.mybatis3.domain.Student"/>
+	</typeAliases>
+	-->
+	
+	<!-- 매퍼 XML 파일 위치 설정 -->
+	<!--
+	<mappers>
+		<mapper resource="classpath:mappers/StudentMapper.xml"/>
+	</mappers>  
+	-->
+</configuration>
