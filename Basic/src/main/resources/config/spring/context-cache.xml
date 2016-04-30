@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xsi:schemaLocation="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 애노테이션 기반(@Cacheable)으로 사용 설정 -->
+	<ehcache:annotation-driven cache-manager="cacheManager"/>
+  
+  	<!-- 전역적으로 캐시에서 제거시 몇개의 엘리먼트 단위로 삭제할 것인지 설정인듯 -->
+  	<!--
+	<ehcache:config cache-manager="cacheManager">
+		<ehcache:evict-expired-elements interval="60" />
+	</ehcache:config>
+  	-->
+  
+	<!-- 캐시 객체, 캐시의 설정 정보 위치 지정 -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" >
+		<property name="configLocation"  value="classpath:config/cache/ehcache.xml"/>
+	</bean> 
+</beans>

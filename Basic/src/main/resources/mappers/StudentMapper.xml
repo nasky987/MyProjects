@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="to.my.code.test.mappers.StudentMapper">
+	
+	<resultMap type="to.my.code.test.domain.Student" id="StudentResult">
+		<id 	property="studId" column="stud_id"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="dob" column="dob"/>
+	</resultMap>
+  
+  	<select id="findAllStudents" resultMap="StudentResult">
+    	select * from STUDENTS
+  	</select>
+  	
+  	<select id="findStudentById" parameterType="int" resultType="to.my.code.test.domain.Student">
+    	select stud_id as studId, name, email, dob from STUDENTS where stud_id=#{studId}
+  	</select>
+  	
+  	<insert id="insertStudent" parameterType="to.my.code.test.domain.Student">
+  		INSERT INTO STUDENTS(STUD_ID,NAME,EMAIL,DOB) VALUES(#{studId},#{name},#{email},#{dob})
+  	</insert>
+</mapper>

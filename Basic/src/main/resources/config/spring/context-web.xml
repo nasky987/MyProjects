@@ -27,6 +27,7 @@
 	<import resource="context-datasource.xml" />
 	<import resource="context-session.xml" />
 	<import resource="context-transaction.xml" />
+	<import resource="context-cache.xml" />
 	
-	<import resource="context-member.xml" />
+	<import resource="context-test.xml" />
 </beans>
