@@ -26,9 +26,9 @@ public class StudentService {
 		return sqlSessionTemplate;
 	}
 
-	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
-		this.sqlSessionTemplate = sqlSessionTemplate;
-	}
+//	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
+//		this.sqlSessionTemplate = sqlSessionTemplate;
+//	}
 
 	@Cacheable(cacheName="customCache")
 	public List<Student> findAllStudents() {

@@ -3,6 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- 공통설정 정보 다른 설정파일 추가시 사용 -->
+	<import resource="context-datasource.xml" />
+	<import resource="context-session.xml" />
+	<import resource="context-transaction.xml" />
+	<import resource="context-cache.xml" />
 </beans>

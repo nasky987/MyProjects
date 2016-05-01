@@ -8,8 +8,26 @@
 						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- 애노테이션 기반의 설정파일(@Configuration) 검색시 사용 -->
+	<!--
 	<mvc:annotation-driven />
+	-->
+	<!-- @ResponseBody로 json 응답시 IE에서 json형식을 파일로 다운받을려고 하는 문제 시 설정 -->
+	<mvc:annotation-driven>
+	    <mvc:message-converters>
+	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	            <property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
+	        </bean>       
+	    </mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	
+	<!-- 애노테이션 기반의 주입(@Autowired, @Resource) 사용 -->
+	<context:annotation-config />
 
+	<!-- 베이스 패키지 아래에 있는 클래스들을 검사하여, @Controller와 같은(@Componenet 계열-@Controller, @Service, @Repository)
+		애노테이션이 붙은 클래스를 스프링 IoC 컨테이너에 자동 등록 -->
+	<context:component-scan base-package="to.my.code" />
+	
 	<!-- 외부에 공개되는 정적 파일 매핑 URL:/resources/로 접근하는 요청은 /resources 위치에서 찾도록 설정 -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
@@ -17,17 +35,41 @@
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
+		<!-- JSON뷰와 함께 사용시 우선순위를 JSON 다음으로 둠 -->
+		<property name="order" value="2" />
 	</bean>
 	
-	<!-- 베이스 패키지 아래에 있는 클래스들을 검사하여, @Controller와 같은(@Componenet 계열) 애노테이션이 붙은 클래스를
-		스프링 IoC 컨테이너에 자동 등록 -->
-	<context:component-scan base-package="to.my.code" />
+	<!-- <mvc:annotation-driven/> 설정 사용하면서 jackson 라이브러리가 클래스패스에 있다면 별도의 메세지 컨버터 설정 필요X -->
+	<!--
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	    <property name="messageConverters">
+	    <list>    
+	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	            <property name="supportedMediaTypes">
+	                <list>
+	                    <value>text/html;charset=UTF-8</value>
+	                    <value>application/json;charset=UTF-8</value>
+	                </list>
+	            </property>
+	        </bean>            
+	    </list>
+	    </property>                        
+	</bean>
+	-->
 	
-	<!-- 다른 설정파일 추가시 사용 -->
-	<import resource="context-datasource.xml" />
-	<import resource="context-session.xml" />
-	<import resource="context-transaction.xml" />
-	<import resource="context-cache.xml" />
+	<!-- @ResponseBody가 아닌 직접 뷰이름을 이용해서 사용시 설정 -->
+	<!-- JSON 데이터를 리턴할때 사용하는 설정인듯.(jsp보다 우선순위 높게 잡음, @ResponseBody로 대체가능) -->
+	<bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1" />
+	</bean>
 	
+	<!-- 뷰이름으로 사용할 빈.(응답할 때 뷰이름을 JSON으로 지정하면 된다.) -->
+	<bean name="JSON" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<!-- 뷰로 리턴할때 사용할 형식. 위에 설정에따라 @ResponseBody는 text/plain이므로 맞춰주는것도 좋다. -->
+		<!-- 단, 자바스크립트에서 $.parseJSON(data) 식으로 파싱을 한번 해줘야 한다고 함. -->
+		<property name="contentType" value="text/plain" />
+	</bean>
+	
+	<!-- 웹 관련 설정파일(exception, view, error-page 등) 추가시 사용 -->
 	<import resource="context-test.xml" />
 </beans>
